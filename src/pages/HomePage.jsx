@@ -17,8 +17,11 @@ const HomePage = () => {
 	const getUserProfileAndRepos = useCallback(async (username = "Moryasamiksa05") => {
 		setLoading(true);
 		try {
-			const res = await fetch(`/api/users/profile/${username}`);
-			const { repos, userProfile } = await res.json();
+		const res = await fetch(
+	`${import.meta.env.VITE_API_BASE_URL}/users/profile/${username}`
+);
+const { repos, userProfile } = await res.json();
+
 
 			repos.sort((a, b) => new Date(b.created_at) - new Date(a.created_at)); //descending, recent first
 

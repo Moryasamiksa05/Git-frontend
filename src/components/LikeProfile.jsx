@@ -9,10 +9,13 @@ const LikeProfile = ({ userProfile }) => {
 
 	const handleLikeProfile = async () => {
 		try {
-			const res = await fetch(`/api/users/like/${userProfile.login}`, {
-				method: "POST",
-				credentials: "include",
-			});
+			const res = await fetch(
+				`${import.meta.env.VITE_API_BASE_URL}/users/like/${userProfile.login}`,
+				{
+					method: "POST",
+					credentials: "include",
+				}
+			);
 			const data = await res.json();
 
 			if (data.error) throw new Error(data.error);
@@ -33,4 +36,5 @@ const LikeProfile = ({ userProfile }) => {
 		</button>
 	);
 };
+
 export default LikeProfile;

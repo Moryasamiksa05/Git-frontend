@@ -4,26 +4,29 @@ import Spinner from "../components/Spinner";
 import Repos from "../components/Repos";
 
 const ExplorePage = () => {
-	// https://api.github.com/search/repositories?q=language:javascript&sort=stars&order=desc&per_page=10
+	
 	const [loading, setLoading] = useState(false);
 	const [repos, setRepos] = useState([]);
 	const [selectedLanguage, setSelectedLanguage] = useState("");
 
-	const exploreRepos = async (language) => {
-		setLoading(true);
-		setRepos([]);
-		try {
-			const res = await fetch("/api/explore/repos/" + language);
-			const { repos } = await res.json();
-			setRepos(repos);
+const exploreRepos = async (language) => {
+	setLoading(true);
+	setRepos([]);
+	try {
+		const res = await fetch(
+			`${import.meta.env.VITE_API_BASE_URL}/explore/repos/${language}`
+		);
+		const { repos } = await res.json();
+		setRepos(repos);
 
-			setSelectedLanguage(language);
-		} catch (error) {
-			toast.error(error.message);
-		} finally {
-			setLoading(false);
-		}
-	};
+		setSelectedLanguage(language);
+	} catch (error) {
+		toast.error(error.message);
+	} finally {
+		setLoading(false);
+	}
+};
+
 	return (
 		<div className='px-4'>
 			<div className='bg-glass max-w-2xl mx-auto rounded-md p-4'>

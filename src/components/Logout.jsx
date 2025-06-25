@@ -7,15 +7,18 @@ const Logout = () => {
 	const { authUser, setAuthUser } = useAuthContext();
 
 	const handleLogout = async () => {
-		try {
-			const res = await fetch("/api/auth/logout", { credentials: "include" });
-			const data = await res.json();
-			console.log(data);
-			setAuthUser(null);
-		} catch (error) {
-			toast.error(error.message);
-		}
-	};
+	try {
+		const res = await fetch(
+			`${import.meta.env.VITE_API_BASE_URL}/auth/logout`,
+			{ credentials: "include" }
+		);
+		const data = await res.json();
+		console.log(data);
+		setAuthUser(null);
+	} catch (error) {
+		toast.error(error.message);
+	}
+};
 
 	return (
 		<>

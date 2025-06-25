@@ -8,16 +8,20 @@ const LikesPage = () => {
 
 	useEffect(() => {
 		const getLikes = async () => {
-			try {
-				const res = await fetch("/api/users/likes", { credentials: "include" });
-				const data = await res.json();
-				if (data.error) throw new Error(data.error);
+	try {
+		const res = await fetch(
+			`${import.meta.env.VITE_API_BASE_URL}/users/likes`,
+			{ credentials: "include" }
+		);
+		const data = await res.json();
+		if (data.error) throw new Error(data.error);
 
-				setLikes(data.likedBy);
-			} catch (error) {
-				toast.error(error.message);
-			}
-		};
+		setLikes(data.likedBy);
+	} catch (error) {
+		toast.error(error.message);
+	}
+};
+
 		getLikes();
 	}, []);
 	console.log("likes:", likes);
